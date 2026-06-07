@@ -16,6 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     // Si entran directo sin pasar por el formulario, los mandamos a tu diseño visual
     header("Location: login.html.php"); 
-    exit();
+header("Location: index.html");
 }
 ?>
